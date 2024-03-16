@@ -2,6 +2,7 @@ import glob
 import os
 import random
 from pathlib import Path
+import re
 
 
 def limit_to_n(path_to_transcript_dict, n=40000):
@@ -12,6 +13,30 @@ def limit_to_n(path_to_transcript_dict, n=40000):
         return limited_dict
     else:
         return path_to_transcript_dict
+
+def build_path_to_transcript_dict_aishell3_dev():
+    root = "/home/wangkengxue/code2/test"
+    path_to_transcript_dict = dict()
+    filter_english_numbers = re.compile(r'[A-Za-z0-9]+')
+    with open(root + "/content.txt", mode="r", encoding="utf8") as f:
+        transcripts = [line.strip() for line in f.readlines()]
+    
+    normal_transcripts = []
+    for line in transcripts:
+        wavs_name = line.split()[0]
+        text_and_pinying = "".join(line.split()[1:])
+        text = re.sub(filter_english_numbers, "", text_and_pinying)
+        normal_line = wavs_name + "|" + text
+        normal_transcripts.append(normal_line)
+
+    del transcripts
+
+    for transcript in normal_transcripts:
+        parsed_line = transcript.split("|")
+        audio_file = f"{root}/wav/{parsed_line[0][:7]}/{parsed_line[0]}"
+        kanji = parsed_line[1]
+        path_to_transcript_dict[audio_file] = kanji
+    return limit_to_n(path_to_transcript_dict, n=100000)
 
 
 def build_path_to_transcript_dict_mls_italian():

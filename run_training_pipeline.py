@@ -15,6 +15,7 @@ from TrainingInterfaces.TrainingPipelines.ToucanTTS_MetaCheckpoint import run as
 from TrainingInterfaces.TrainingPipelines.ToucanTTS_Nancy import run as nancy
 from TrainingInterfaces.TrainingPipelines.finetuning_example import run as fine_tuning_example
 from TrainingInterfaces.TrainingPipelines.pretrain_aligner import run as aligner
+from TrainingInterfaces.TrainingPipelines.fastspeech2_dev import run as fs2_dev
 
 pipeline_dict = {
     # the finetuning example
@@ -33,6 +34,8 @@ pipeline_dict = {
     "embedding"     : embedding,
     # training the aligner from scratch (not recommended, best to use provided checkpoint)
     "aligner"       : aligner,
+    # training a fs2 from scratch
+    "fs2_dev": fs2_dev,
 }
 
 if __name__ == '__main__':

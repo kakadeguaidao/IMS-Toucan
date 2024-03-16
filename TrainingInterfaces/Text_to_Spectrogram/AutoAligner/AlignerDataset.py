@@ -92,7 +92,7 @@ class AlignerDataset(Dataset):
 
             # add speaker embeddings
             self.speaker_embeddings = list()
-            speaker_embedding_func_ecapa = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb",
+            speaker_embedding_func_ecapa = EncoderClassifier.from_hparams(source="/home/wangkengxue/code2/IMS-Toucan/Models/Embedding/speechbrain_speaker_embedding_ecapa/embedding_model.ckpt",
                                                                           run_opts={"device": str(device)},
                                                                           savedir=os.path.join(
                                                                               MODELS_DIR,

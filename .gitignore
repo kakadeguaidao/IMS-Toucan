@@ -1,3 +1,6 @@
+chkpt/
+__pycache__/
+
 .idea/
 tensorboard_logs/
 Corpora/
